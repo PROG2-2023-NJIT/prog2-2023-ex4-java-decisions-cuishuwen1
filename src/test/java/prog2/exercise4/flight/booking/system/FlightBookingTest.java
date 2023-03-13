@@ -1,9 +1,10 @@
 package prog2.exercise4.flight.booking.system;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
 import java.time.LocalDate;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 
 public class FlightBookingTest 
@@ -33,7 +34,7 @@ public class FlightBookingTest
         FlightBooking fb = new FlightBooking(null, null, null, 0, 0);
         fb.setTripSource("2");
         FlightBooking.TripSource expected = FlightBooking.TripSource.BEIJING;
-        FlightBooking.TripSource  result = fb.getTripSource(); 
+        FlightBooking.TripSource  result = fb.getTripSource();
         assertEquals(expected, result);
     }
 
@@ -75,7 +76,7 @@ public class FlightBookingTest
         FlightBooking.BookingClass bookClass = FlightBooking.BookingClass.FIRST;
 
         fb.setTripSource("1");
-        fb.setTripDestination("1", "2");
+        fb.setTripDestination("1","2");
 
         fb.setTripType("1");
         fb.setBookingClass("1");
@@ -113,7 +114,7 @@ public class FlightBookingTest
         int child = 2;
         int adults = 5;
         fb.setTripSource("1");
-        fb.setTripDestination("1", "2");
+        fb.setTripDestination("1","2");
 
         fb.setTripType("2");
         fb.setBookingClass("1");
