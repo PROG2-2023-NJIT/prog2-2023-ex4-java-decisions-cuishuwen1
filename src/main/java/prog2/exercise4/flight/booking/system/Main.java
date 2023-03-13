@@ -98,6 +98,7 @@ public class Main
         fb.setTripDestination(y, destination2);
         fb.setDepartingTicketPrice(ChildPassengers,AdultPassengers);
         fb.setTotalTicketPrice();
+        fb.setTicketNumber();
 
 
         System.out.println(fb);

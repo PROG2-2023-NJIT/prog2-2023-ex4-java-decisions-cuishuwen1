@@ -1,6 +1,7 @@
 package prog2.exercise4.flight.booking.system;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class FlightBooking {
 private final String passengerFullName;
@@ -10,22 +11,22 @@ private  LocalDate ReturnDate;
 private final int ChildPassengers;
 private final int AdultPassengers;
 private int TotalPassengers;
-private final String TicketNumber="DH1518654";
-private  int TotalTicketPrice;
+
+private  double TotalTicketPrice;
 private  String choice;
 private String triptype;
 private String sourceairport;
 private String destinationairport;
 private String source;
 private String destination;
-    private int DT1;
     private int p;
-    private int DT2;
-    private int rtp;
+    private double DT2;
     private  int i;
     private  int j;
     private int u;
     private int r;
+    private String ticketNumber;
+    private  String classification;
 
 
     FlightBooking(String passengerFullName, LocalDate DepartureDate, LocalDate ReturnDate, int childPassengers ,int adultPassengers ){
@@ -45,7 +46,7 @@ private String destination;
         setBookingClass(n);
         setTripSource(x);
         setTripDestination(y,destination2);
-
+         setTicketNumber();
         setTotalTicketPrice();
     }
 
@@ -65,9 +66,9 @@ public  LocalDate getReturnDate(){
         }
 public int getTotalPassengers() {return TotalPassengers;}
 
-public int getTotalTicketPrice() {return TotalTicketPrice;}
+public double getTotalTicketPrice() {return TotalTicketPrice;}
 
-public String getTicketNumber() {return TicketNumber;}
+
 
 
 public int getAdultPassengers() {
@@ -93,7 +94,7 @@ public int getChildPassengers() {
         ReturnDate = returnDate;
     }
     public void setReturnTicketPrice(){
-        rtp=DT2;
+        double rtp = DT2;
     }
 
     public void setTotalPassengers(int childPassengers, int adultPassengers){
@@ -101,7 +102,7 @@ public int getChildPassengers() {
         }
 
 public void setTotalTicketPrice() {
-        TotalTicketPrice=DT2*u;
+        this.TotalTicketPrice=DT2*u;
         }
 
     enum BookingClass{FIRST,BUSINESS,ECONOMY}
@@ -225,29 +226,98 @@ public void setTotalTicketPrice() {
     public void setDepartingTicketPrice(int childPassengers,int adultPassengers){
         r=childPassengers+adultPassengers;
 
+        double DT1;
         if(i<4 && j<4){
-            this.DT1=(300+30+15)*r;
+            DT1 =(300+30+15)*r;
         }
         else if(3<i && i<6 && 6>j && j>3){
-            this.DT1=(300+15+30)*r;
+            DT1 =(300+15+30)*r;
         }
         else{
-            this.DT1=(300+45+30)*r;
+            DT1 =(300+45+30)*r;
         }
 
 
         switch (p){
             case 1:
-                this.DT2=DT1+250*r;
+                this.DT2= DT1 +250*r;
+                classification="domestic";
                 break;
             case 2:
-                this.DT2=DT1+150*r;
+                this.DT2= DT1 +150*r;
+                classification="domestic";
                 break;
             case 3:
-                this.DT2=DT1+50*r;
+                this.DT2= DT1 +50*r;
+                classification="international";
 
         }
 
+    }
+
+    public String getTicketNumber()
+    {
+        return ticketNumber;
+    }
+
+
+
+
+
+    public void setTicketNumber()
+    {
+        Random rnd = new Random();
+        int number = rnd.nextInt(9000)+1000;
+        String m = String.valueOf(number);
+        switch (p){
+            case 1:
+                if (u==1)
+                {
+                    if (classification.equals("domestic"))
+                        this.ticketNumber = "11" + "F" + m + "DOM";
+                    else
+                        this.ticketNumber = "11" + "F" + m + "INT";
+                }
+                else{
+                    if (classification.equals("domestic"))
+                        this.ticketNumber = "22" + "F" + m + "DOM";
+                    else
+                        this.ticketNumber = "22" + "F" + m + "INT";
+                }
+                break;
+            case 2:
+                if (u==1)
+                {
+                    if (classification.equals("international"))
+                        this.ticketNumber = "11" + "B" + m + "DOM";
+                    else
+                        this.ticketNumber = "11" + "B" + m + "INT";
+                }
+                else{
+                    if (classification.equals("domestic"))
+                        this.ticketNumber = "22" + "B" + m + "DOM";
+                    else
+                        this.ticketNumber = "22" + "B" + m + "INT";
+                }
+                break;
+            case 3:
+                if (u==1)
+                {
+                    if (classification.equals("international"))
+                        this.ticketNumber = "11" + "E" + m + "DOM";
+                    else
+                        this.ticketNumber = "11" + "E" + m + "INT";
+                }
+                else{
+                    if (classification.equals("domestic"))
+                        this.ticketNumber = "22" + "E" + m + "DOM";
+                    else
+                        this.ticketNumber = "22" + "E" + m + "INT";
+                }
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -255,7 +325,7 @@ public void setTotalTicketPrice() {
     public String toString(){
         return  " Thank you for booking your flight with " + FlightCompany + "." +
         "Following are the details of your booking and the trip:" + "\n" +
-        "Ticket Number: " + TicketNumber + "\n" +
+        "Ticket Number: " + ticketNumber + "\n" +
         "Passenger Name:"+passengerFullName+"\n"+
         "From  " + source + " to  " + destination + "\n" +
         "Date of departure: " + DepartureDate + "\n" +
